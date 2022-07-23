@@ -39,49 +39,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resize = void 0;
-var path_1 = __importDefault(require("path"));
+var supertest_1 = __importDefault(require("supertest"));
+var index_1 = __importDefault(require("../index"));
 var fs_1 = __importDefault(require("fs"));
-var sharp_1 = __importDefault(require("sharp"));
-var resize = function (width, height, fileName) { return __awaiter(void 0, void 0, void 0, function () {
-    var rezPath, absolutePath, rezPath, absolutePath, rezPath, absolutePath;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (!(width && height)) return [3 /*break*/, 4];
-                rezPath = path_1.default.resolve('images/Resized/' + fileName + "-width=".concat(width, "-height=").concat(height) + '.jpg');
-                absolutePath = path_1.default.resolve('images/full/' + fileName + '.jpg');
-                if (!fs_1.default.existsSync(rezPath)) return [3 /*break*/, 1];
-                return [2 /*return*/, rezPath];
-            case 1: return [4 /*yield*/, (0, sharp_1.default)(absolutePath)
-                    .resize({ width: width, height: height })
-                    .toFile(rezPath)];
-            case 2:
-                _a.sent();
-                return [2 /*return*/, rezPath];
-            case 3: return [3 /*break*/, 11];
-            case 4:
-                if (!(width && !height)) return [3 /*break*/, 8];
-                rezPath = path_1.default.resolve('images/Resized/' + fileName + "-width=".concat(width) + '.jpg');
-                absolutePath = path_1.default.resolve('images/full/' + fileName + '.jpg');
-                if (!fs_1.default.existsSync(rezPath)) return [3 /*break*/, 5];
-                return [2 /*return*/, rezPath];
-            case 5: return [4 /*yield*/, (0, sharp_1.default)(absolutePath).resize({ width: width }).toFile(rezPath)];
-            case 6:
-                _a.sent();
-                return [2 /*return*/, rezPath];
-            case 7: return [3 /*break*/, 11];
-            case 8:
-                rezPath = path_1.default.resolve('images/Resized/' + fileName + "-height=".concat(height) + '.jpg');
-                absolutePath = path_1.default.resolve('images/full/' + fileName + '.jpg');
-                if (!fs_1.default.existsSync(rezPath)) return [3 /*break*/, 9];
-                return [2 /*return*/, rezPath];
-            case 9: return [4 /*yield*/, (0, sharp_1.default)(absolutePath).resize({ height: height }).toFile(rezPath)];
-            case 10:
-                _a.sent();
-                return [2 /*return*/, rezPath];
-            case 11: return [2 /*return*/];
+var resize_1 = require("../utill/resize");
+// create a request object
+var request = (0, supertest_1.default)(index_1.default);
+describe('test the resize utility', function () {
+    var resizedImageDir = 'C:/Users/ASUS/Desktop/codes/api/images/Resiz/encenadaport-width=345-height=190.jpg';
+    var width = 345;
+    var height = 190;
+    var fileName = 'encenadaport';
+    beforeAll(function () {
+        if (fs_1.default.existsSync(resizedImageDir)) {
+            fs_1.default.rmSync(resizedImageDir);
         }
     });
-}); };
-exports.resize = resize;
+    it('test that new img is created', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var newResizedImageDir, _a, _b, _c;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
+                case 0:
+                    newResizedImageDir = (0, resize_1.resize)(width, height, fileName);
+                    _a = expect;
+                    _c = (_b = fs_1.default).existsSync;
+                    return [4 /*yield*/, Promise.resolve(newResizedImageDir)];
+                case 1:
+                    _a.apply(void 0, [_c.apply(_b, [(_d.sent()).toString()])]).toBeTruthy;
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});
