@@ -21,6 +21,16 @@ build
 ```bash
 npm run build
 ```
+prettier
+
+```bash
+npm run format
+```
+esLint
+
+```bash
+npm run lint
+```
 
 ## Usage
 

@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import path from 'path'
 import fs from 'fs'
-import { resize } from '../../../utill/resize'
+import { resize } from '../../../utility/resize'
 const firstroute = express.Router()
 
 firstroute.get('/', async (req: Request, res: Response): Promise<void> => {

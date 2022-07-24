@@ -1,9 +1,6 @@
-import supertest from 'supertest'
-import app from '../index'
 import fs from 'fs'
-import { resize } from '../utill/resize'
+import { resize } from '../utility/resize'
 // create a request object
-const request = supertest(app)
 
 describe('test the resize utility', () => {
   const resizedImageDir =

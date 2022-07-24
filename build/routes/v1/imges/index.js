@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var path_1 = __importDefault(require("path"));
 var fs_1 = __importDefault(require("fs"));
-var resize_1 = require("../../../utill/resize");
+var resize_1 = require("../../../utility/resize");
 var firstroute = express_1.default.Router();
 firstroute.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var query, fileName, widths, heights, width, height, absolutePath, place, _a, _b;
